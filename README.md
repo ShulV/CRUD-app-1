@@ -17,10 +17,23 @@ CREATE TABLE books(
     "name" varchar(100) NOT NULL,
     author varchar(100) NOT NULL,
     date date NOT NULL,
-    people_id int NOT NULL REFERENCES people(id) ON DELETE Restrict ON UPDATE Cascade
+    people_id int DEFAULT NULL REFERENCES people(id) ON DELETE Restrict ON UPDATE Cascade
 );
 
+Пример скрипта добавления книг:
+INSERT INTO public.books(
+	name, author, date)
+	VALUES ('Война и мир', 'Лев Толстой', '01.01.1862'),
+	('Отцы и дети', 'Иван Тургенев', '01.01.1868'),
+	('Старик и море', 'Эрнест Хемингуэй', '01.01.1952');
 
+Пример скрипта добавления пользователей:
+INSERT INTO public.people(
+	name, patronymic, surname, birthday)
+	VALUES ('Виктор', 'Максимович', 'Шульпов', '14.07.2001'),
+	('Илья', 'Игоревич', 'Шинтяпин', '15.05.2001'),
+	('Максим', 'Владимирович', 'Владимирович', '16.10.2000');
+	
 
 
 
