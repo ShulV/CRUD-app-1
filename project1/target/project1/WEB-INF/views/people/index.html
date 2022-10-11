@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Person list</title>
 </head>
 <body>
-  <p>Person list</p>
+<h2>Страница со списком всех людей</h2>
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}">
+        <span th:text="${person.getName()}"></span>
+        <span th:text="${person.getPatronymic()}"></span>
+        <span th:text="${person.getSurname()}"></span>,
+        <span th:text="${person.getBirthdayYear()}"></span>
+    </a>
+</div>
+<hr>
+<a href="/people/new">Добавить</a>
 </body>
 </html>
