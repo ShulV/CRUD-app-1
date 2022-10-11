@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Person adding form</title>
 </head>
 <body>
-<p>Person adding form</p>
+<h2>Страница добавления человека</h2>
+<form th:method="post" th:action="@{/people}" th:object="${person}">
+  <label th:for="name">Введите имя:</label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <label th:for="patronymic">Введите отчество:</label>
+  <input type="text" th:field="*{patronymic}" id="patronymic"/>
+  <label th:for="surname">Введите фамилию:</label>
+  <input type="text" th:field="*{surname}" id="surname"/>
+  <input type="submit" value="Добавить"/>
+</form>
 </body>
 </html>

@@ -19,4 +19,13 @@ public class PersonDAO {
     public List<Person> index() {
         return jdbcTemplate.query("SELECT * FROM People", new PersonRowMapper());
     }
+
+    public void save(Person person) {
+        jdbcTemplate.update("INSERT INTO public.people(name, patronymic, surname, birthday)" +
+                        "VALUES (?, ?, ?, ?);",
+                person.getName(),
+                person.getPatronymic(),
+                person.getSurname(),
+                person.getBirthday());
+    }
 }
