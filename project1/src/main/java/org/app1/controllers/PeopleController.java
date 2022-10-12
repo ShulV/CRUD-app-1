@@ -35,7 +35,8 @@ public class PeopleController {
     }
     //страница добавления человека
     @GetMapping("/new")
-    public String newPersonPage() {
+    public String newPersonPage(Model model) {
+        model.addAttribute("person", new Person());
         return "people/new-person";
     }
 
