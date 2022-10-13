@@ -20,4 +20,12 @@ public class BookDAO {
     public List<Book> index() {
         return jdbcTemplate.query("SELECT * FROM Books", new BookRowMapper());
     }
+
+    public void save(Book book) {
+        jdbcTemplate.update("INSERT INTO public.books(name, author, date) " +
+                        "VALUES (?, ?, ?);",
+                book.getName(),
+                book.getAuthor(),
+                book.getDate());
+    }
 }

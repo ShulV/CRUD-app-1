@@ -1,12 +1,14 @@
 package org.app1.controllers;
 
+import jakarta.validation.Valid;
 import org.app1.dao.BookDAO;
+import org.app1.models.Book;
+import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/books")
@@ -30,8 +32,18 @@ public class BooksController {
     }
     //страница добавления книги
     @GetMapping("/new")
-    public String newBookPage() {
+    public String newBookPage(Model model) {
+        model.addAttribute("book", new Book());
         return "books/new-book";
+    }
+    @PostMapping()
+    public String createBook(@ModelAttribute("book") @Valid Book book,
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "books/new-book";
+
+        bookDAO.save(book);
+        return "redirect:/books";
     }
     //страница изменения книги
     @GetMapping("/{id}/edit")
