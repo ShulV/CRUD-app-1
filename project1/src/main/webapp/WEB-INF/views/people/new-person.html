@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Страница добавления человека</h2>
-<form th:method="post" th:action="@{/people}" th:object="${person}" class="add-person-form">
+<form th:method="POST" th:action="@{/people}" th:object="${person}" class="add-person-form">
   <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
   <div class="add-person-form__field">
     <label th:for="name">Введите имя:</label>
