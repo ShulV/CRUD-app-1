@@ -3,6 +3,7 @@ package org.app1.controllers;
 
 
 import org.app1.dao.PersonDAO;
+import org.app1.models.Book;
 import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -37,6 +39,7 @@ public class PeopleController {
         Optional<Person> person = personDAO.getPerson(id);
         if (person.isPresent()) {
             model.addAttribute("person", person.get());
+            model.addAttribute("books", personDAO.getBooksByPerson(id));
             return "people/person";
         }
         else {

@@ -3,7 +3,6 @@ package org.app1.controllers;
 
 import org.app1.dao.BookDAO;
 import org.app1.models.Book;
-import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,7 @@
 package org.app1.dao;
 
 import org.app1.models.Book;
+import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,14 @@ public class BookDAO {
     //получить список всех книг
     public List<Book> index() {
         return jdbcTemplate.query("SELECT * FROM Books", new BookRowMapper());
+    }
+
+    //получить список книг, взятых определенным человеком
+    public Optional<Person> getBookOwner(int id) {
+        return jdbcTemplate.query("select p.id, p.name, p.patronymic, p.surname, p.patronymic from people as p " +
+                "join books as b " +
+                "on p.id = b.person_id " +
+                "where b.id = ?;", new PersonRowMapper(), id).stream().findAny();
     }
 
     //добавить книгу

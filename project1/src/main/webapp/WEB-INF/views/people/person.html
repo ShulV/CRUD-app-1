@@ -7,6 +7,7 @@
 <body>
 
 <h2>Страница с информацией о человеке</h2>
+<!---->
 <div>
   <span th:text="${person.getName()}"></span>
   <span th:text="${person.getPatronymic()}"></span>
@@ -14,9 +15,29 @@
   <span th:text="${person.getBirthdayYear()}"></span>
 </div>
 <hr>
+<!---->
+<div th:if="${#lists.isEmpty(books)}">
+  <p>Человека пока не взял ни одной книги</p>
+</div>
+<!---->
+<div th:unless="${#lists.isEmpty(books)}">
+  <h4>Книги:</h4>
+  <div th:each="book : ${books}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}">
+      <span th:text="${book.getName()}"></span>,
+      <span th:text="${book.getAuthor()}"></span>,
+      <span th:text="${book.getYear()}"></span>
+    </a>
+  </div>
+</div>
+<!---->
+<hr>
+<!---->
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>
+<!---->
 <form th:method="DELETE" th:action="@{/people/{id}/edit(id=${person.getId()})}">
   <input type="submit" value="Удалить"/>
 </form>
+<!---->
 </body>
 </html>
