@@ -1,0 +1,16 @@
+
+.add-person-form {
+    width: 500px;
+    padding: 20px;
+}
+
+.add-person-form__field {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-person-form__btn-submit {
+    margin-top: 10px;
+}
