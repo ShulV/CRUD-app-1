@@ -5,6 +5,16 @@
   <title>Book</title>
 </head>
 <body>
-<p>Book</p>
+<h2>Страница с информацией о человеке</h2>
+<div>
+  <span th:text="${book.getName()}"></span>,
+  <span th:text="${book.getAuthor()}"></span>,
+  <span th:text="${book.getYear()}"></span>
+</div>
+<hr>
+<a th:href="@{/books/{id}/edit(id=${book.getId()})}">Редактировать</a>
+<form th:method="DELETE" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+  <input type="submit" value="Удалить"/>
+</form>
 </body>
 </html>

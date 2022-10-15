@@ -21,7 +21,8 @@ public class Book {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
-    public Book(String name, String author, LocalDate date) {
+    public Book(int id, String name, String author, LocalDate date) {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.date = date;

@@ -5,6 +5,18 @@
   <title>Person</title>
 </head>
 <body>
-<p>Person</p>
+
+<h2>Страница с информацией о человеке</h2>
+<div>
+  <span th:text="${person.getName()}"></span>
+  <span th:text="${person.getPatronymic()}"></span>
+  <span th:text="${person.getSurname()}"></span>,
+  <span th:text="${person.getBirthdayYear()}"></span>
+</div>
+<hr>
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>
+<form th:method="DELETE" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+  <input type="submit" value="Удалить"/>
+</form>
 </body>
 </html>

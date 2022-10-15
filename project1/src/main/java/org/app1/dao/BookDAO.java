@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -16,16 +17,23 @@ public class BookDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+    //получить список всех книг
     public List<Book> index() {
         return jdbcTemplate.query("SELECT * FROM Books", new BookRowMapper());
     }
 
+    //добавить книгу
     public void save(Book book) {
         jdbcTemplate.update("INSERT INTO public.books(name, author, date) " +
                         "VALUES (?, ?, ?);",
                 book.getName(),
                 book.getAuthor(),
                 book.getDate());
+    }
+
+    //получить книгу по id
+    public Optional<Book> getBook(int id) {
+        return jdbcTemplate.query("SELECT * FROM Books WHERE id=?;",
+                new BookRowMapper(), new Object[]{id}).stream().findAny();
     }
 }

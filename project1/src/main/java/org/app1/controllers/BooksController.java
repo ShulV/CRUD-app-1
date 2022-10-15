@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -29,8 +30,16 @@ public class BooksController {
     }
     //страница с определенной книгой
     @GetMapping("/{id}")
-    public String bookPage(@PathVariable String id, Model model) {
-        return "books/book";
+    public String bookPage(@PathVariable int id, Model model) {
+        Optional<Book> book = bookDAO.getBook(id);
+        if (book.isPresent()) {
+            model.addAttribute("book", book.get());
+            return "books/book";
+        }
+        else {
+            return "redirect:/books";
+        }
+
     }
     //страница добавления книги
     @GetMapping("/new")
