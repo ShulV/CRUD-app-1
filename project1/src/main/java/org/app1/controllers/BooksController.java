@@ -3,6 +3,7 @@ package org.app1.controllers;
 
 import org.app1.dao.BookDAO;
 import org.app1.models.Book;
+import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,8 @@ public class BooksController {
         Optional<Book> book = bookDAO.getBook(id);
         if (book.isPresent()) {
             model.addAttribute("book", book.get());
+            Optional<Person> personOwner = bookDAO.getBookOwner(id);
+            personOwner.ifPresent(person -> model.addAttribute("person_owner", person));
             return "books/book";
         }
         else {

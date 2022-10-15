@@ -25,7 +25,7 @@ public class BookDAO {
 
     //получить список книг, взятых определенным человеком
     public Optional<Person> getBookOwner(int id) {
-        return jdbcTemplate.query("select p.id, p.name, p.patronymic, p.surname, p.patronymic from people as p " +
+        return jdbcTemplate.query("select p.id, p.name, p.patronymic, p.surname, p.birthday from people as p " +
                 "join books as b " +
                 "on p.id = b.person_id " +
                 "where b.id = ?;", new PersonRowMapper(), id).stream().findAny();
