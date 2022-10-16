@@ -3,7 +3,6 @@ package org.app1.dao;
 import org.app1.models.Book;
 import org.app1.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -43,5 +42,10 @@ public class PersonDAO {
     //получить список книг, взятых определенным человеком
     public List<Book> getBooksByPerson(int id) {
         return jdbcTemplate.query("select * from Books where person_id = ?", new BookRowMapper(), id);
+    }
+
+    //удалить человека по id
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM People WHERE id = ?;", id);
     }
 }

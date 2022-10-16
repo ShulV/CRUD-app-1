@@ -4,6 +4,7 @@ package org.app1.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -60,6 +61,10 @@ public class Person {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s %s", getName(), getPatronymic(), getSurname());
     }
 
     public LocalDate getBirthday() {
