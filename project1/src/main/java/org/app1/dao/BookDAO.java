@@ -50,4 +50,14 @@ public class BookDAO {
     public void deleteBook(int id) {
         jdbcTemplate.update("DELETE FROM Books WHERE id = ?;", id);
     }
+
+    //присвоить книгу по id определенному человеку
+    public void assign(int id, Person selectedPerson) {
+        jdbcTemplate.update("UPDATE Books SET person_id = ? WHERE id = ?;", selectedPerson.getId(), id);
+    }
+
+    //освободить книгу по id
+    public void release(int id) {
+        jdbcTemplate.update("UPDATE Books SET person_id = NULL WHERE id = ?;", id);
+    }
 }

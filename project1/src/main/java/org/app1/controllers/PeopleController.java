@@ -66,7 +66,7 @@ public class PeopleController {
 
     //запрос на получение страницы изменения человека
     @GetMapping("/{id}/edit")
-    public String editPersonPage(@PathVariable String id, Model model) {
+    public String editPersonPage(@PathVariable int id, Model model) {
         return "people/edit-person";
     }
 

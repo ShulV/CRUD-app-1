@@ -72,7 +72,7 @@ public class BooksController {
     }
     //запрос на получение страницы изменения книги
     @GetMapping("/{id}/edit")
-    public String editBookPage(@PathVariable String id, Model model) {
+    public String editBookPage(@PathVariable int id, Model model) {
         return "books/edit-book";
     }
 
@@ -81,5 +81,17 @@ public class BooksController {
     public String delete(@PathVariable int id) {
         bookDAO.deleteBook(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/assign")
+    public String assign(@PathVariable int id, @ModelAttribute("person") Person selectedPerson) {
+        bookDAO.assign(id, selectedPerson);
+        return "redirect:/books/" + id;
+    }
+
+    @PatchMapping("/{id}/release")
+    public String release(@PathVariable int id) {
+        bookDAO.release(id);
+        return "redirect:/books/" + id;
     }
 }
