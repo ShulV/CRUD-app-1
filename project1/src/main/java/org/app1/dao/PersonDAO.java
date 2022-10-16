@@ -44,4 +44,9 @@ public class PersonDAO {
     public List<Book> getBooksByPerson(int id) {
         return jdbcTemplate.query("select * from Books where person_id = ?", new BookRowMapper(), id);
     }
+
+    //удалить человека по id
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM People WHERE id = ?;", id);
+    }
 }

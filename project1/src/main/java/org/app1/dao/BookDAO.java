@@ -45,4 +45,9 @@ public class BookDAO {
         return jdbcTemplate.query("SELECT * FROM Books WHERE id=?;",
                 new BookRowMapper(), new Object[]{id}).stream().findAny();
     }
+
+    //удалить книгу по id
+    public void deleteBook(int id) {
+        jdbcTemplate.update("DELETE FROM Books WHERE id = ?;", id);
+    }
 }
