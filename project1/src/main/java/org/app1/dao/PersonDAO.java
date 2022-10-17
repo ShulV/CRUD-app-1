@@ -48,4 +48,15 @@ public class PersonDAO {
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM People WHERE id = ?;", id);
     }
+
+    //редактировать данные о человеке
+    public void update(Person updatedPerson, int id) {
+        jdbcTemplate.update("update people set " +
+                "name = ?, patronymic = ?, surname = ?, birthday = ? where id = ?;",
+                updatedPerson.getName(),
+                updatedPerson.getPatronymic(),
+                updatedPerson.getSurname(),
+                updatedPerson.getBirthday(),
+                id);
+    }
 }

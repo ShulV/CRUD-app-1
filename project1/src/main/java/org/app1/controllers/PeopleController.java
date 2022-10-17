@@ -66,8 +66,24 @@ public class PeopleController {
 
     //запрос на получение страницы изменения человека
     @GetMapping("/{id}/edit")
-    public String editPersonPage(@PathVariable int id, Model model) {
-        return "people/edit-person";
+    public String editPersonPage(Model model, @PathVariable int id) {
+        Optional<Person> person = personDAO.getPerson(id);
+        if (person.isPresent()) {
+            model.addAttribute("person", person.get());
+            return "/people/edit-person";
+        }
+        return "redirect:/people";
+    }
+
+    //запрос на редатирование человека
+    @PatchMapping("/{id}")
+    public String edit(@PathVariable int id, @ModelAttribute("person") @Valid Person person,
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "people/edit-person";
+
+        personDAO.update(person, id);
+        return "redirect:/people/" + id;
     }
 
     //запрос на удаление человека
