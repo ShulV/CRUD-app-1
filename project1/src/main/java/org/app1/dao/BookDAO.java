@@ -60,4 +60,14 @@ public class BookDAO {
     public void release(int id) {
         jdbcTemplate.update("UPDATE Books SET person_id = NULL WHERE id = ?;", id);
     }
+
+    //редактировать данные книги
+    public void update(Book updatedBook, int id) {
+        jdbcTemplate.update("update books set " +
+                        "name = ?, author = ?, date = ? where id = ?;",
+                updatedBook.getName(),
+                updatedBook.getAuthor(),
+                updatedBook.getDate(),
+                id);
+    }
 }
