@@ -4,8 +4,10 @@ package org.app1.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,15 +29,20 @@ public class Person {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
+    @NotNull(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
+    private String email;
+
     public Person() {
     }
 
-    public Person(int id, String name, String patronymic, String surname, LocalDate birthday) {
+    public Person(int id, String name, String patronymic, String surname, LocalDate birthday, String email) {
         this.id = id;
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;
         this.birthday = birthday;
+        this.email = email;
     }
 
     public String getName() {
@@ -62,6 +69,10 @@ public class Person {
         this.surname = surname;
     }
 
+    public String getFullName() {
+        return String.format("%s %s %s", getName(), getPatronymic(), getSurname());
+    }
+
     public LocalDate getBirthday() {
         return birthday;
     }
@@ -82,6 +93,14 @@ public class Person {
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -90,6 +109,7 @@ public class Person {
                 ", patronymic='" + patronymic + '\'' +
                 ", surname='" + surname + '\'' +
                 ", birthday=" + birthday +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

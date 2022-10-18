@@ -3,8 +3,8 @@ package org.app1.controllers;
 
 
 import org.app1.dao.PersonDAO;
-import org.app1.models.Book;
 import org.app1.models.Person;
+import org.app1.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,10 +19,12 @@ import java.util.Optional;
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     //запрос на получение страницы со списком всех людей
@@ -57,6 +58,7 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors())
             return "people/new-person";
 
@@ -66,7 +68,31 @@ public class PeopleController {
 
     //запрос на получение страницы изменения человека
     @GetMapping("/{id}/edit")
-    public String editPersonPage(@PathVariable String id, Model model) {
-        return "people/edit-person";
+    public String editPersonPage(Model model, @PathVariable int id) {
+        Optional<Person> selectedPerson = personDAO.getPerson(id);
+        if (selectedPerson.isPresent()) {
+            model.addAttribute("person", selectedPerson.get());
+            return "/people/edit-person";
+        }
+        return "redirect:/people";
+    }
+
+    //запрос на редактирование человека
+    @PatchMapping("/{id}")
+    public String edit(@PathVariable int id, @ModelAttribute("person") @Valid Person updatedPerson,
+                       BindingResult bindingResult) {
+        personValidator.validate(updatedPerson, bindingResult);
+        if (bindingResult.hasErrors())
+            return "people/edit-person";
+
+        personDAO.update(updatedPerson, id);
+        return "redirect:/people/" + id;
+    }
+
+    //запрос на удаление человека
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        personDAO.delete(id);
+        return "redirect:/people";
     }
 }

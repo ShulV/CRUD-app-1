@@ -9,10 +9,9 @@
 <h2>Страница с информацией о человеке</h2>
 <!---->
 <div>
-  <span th:text="${person.getName()}"></span>
-  <span th:text="${person.getPatronymic()}"></span>
-  <span th:text="${person.getSurname()}"></span>,
-  <span th:text="${person.getBirthdayYear()}"></span>
+  <span th:text="${person.getFullName()}"></span>,
+  <span th:text="${person.getBirthdayYear()}"></span>,
+  <span th:text="${person.getEmail()}"></span>
 </div>
 <hr>
 <!---->
@@ -33,9 +32,11 @@
 <!---->
 <hr>
 <!---->
-<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+  <input type="submit" value="Редактировать"/>
+</form>
 <!---->
-<form th:method="DELETE" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
   <input type="submit" value="Удалить"/>
 </form>
 <!---->

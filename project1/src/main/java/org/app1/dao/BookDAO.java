@@ -25,7 +25,8 @@ public class BookDAO {
 
     //получить список книг, взятых определенным человеком
     public Optional<Person> getBookOwner(int id) {
-        return jdbcTemplate.query("select p.id, p.name, p.patronymic, p.surname, p.birthday from people as p " +
+        return jdbcTemplate.query("select p.id, p.name, p.patronymic, p.surname, p.birthday, p.email " +
+                "from people as p " +
                 "join books as b " +
                 "on p.id = b.person_id " +
                 "where b.id = ?;", new PersonRowMapper(), id).stream().findAny();
@@ -44,5 +45,30 @@ public class BookDAO {
     public Optional<Book> getBook(int id) {
         return jdbcTemplate.query("SELECT * FROM Books WHERE id=?;",
                 new BookRowMapper(), new Object[]{id}).stream().findAny();
+    }
+
+    //удалить книгу по id
+    public void deleteBook(int id) {
+        jdbcTemplate.update("DELETE FROM Books WHERE id = ?;", id);
+    }
+
+    //присвоить книгу по id определенному человеку
+    public void assign(int id, Person selectedPerson) {
+        jdbcTemplate.update("UPDATE Books SET person_id = ? WHERE id = ?;", selectedPerson.getId(), id);
+    }
+
+    //освободить книгу по id
+    public void release(int id) {
+        jdbcTemplate.update("UPDATE Books SET person_id = NULL WHERE id = ?;", id);
+    }
+
+    //редактировать данные книги
+    public void update(Book updatedBook, int id) {
+        jdbcTemplate.update("update books set " +
+                        "name = ?, author = ?, date = ? where id = ?;",
+                updatedBook.getName(),
+                updatedBook.getAuthor(),
+                updatedBook.getDate(),
+                id);
     }
 }
