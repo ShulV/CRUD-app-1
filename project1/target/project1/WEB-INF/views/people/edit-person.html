@@ -27,6 +27,11 @@
     <label th:for="birthday">Выберите дату рождения:</label>
     <input type="date" th:field="*{birthday}" id="birthday"/>
   </div>
+  <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+  <div>
+    <label th:for="email">Введите email:</label>
+    <input type="text" id="email" th:field="*{email}" />
+  </div>
   <input type="submit" value="Изменить"/>
 </form>
 </body>

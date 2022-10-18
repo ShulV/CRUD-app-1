@@ -8,10 +8,9 @@
 <h2>Страница со списком всех людей</h2>
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}">
-        <span th:text="${person.getName()}"></span>
-        <span th:text="${person.getPatronymic()}"></span>
-        <span th:text="${person.getSurname()}"></span>,
-        <span th:text="${person.getBirthdayYear()}"></span>
+        <span th:text="${person.getFullName()}"></span>,
+        <span th:text="${person.getBirthdayYear()}"></span>,
+        <span th:text="${person.getEmail()}"></span>
     </a>
 </div>
 <hr>

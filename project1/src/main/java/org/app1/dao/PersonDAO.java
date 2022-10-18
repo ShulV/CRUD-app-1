@@ -25,18 +25,25 @@ public class PersonDAO {
 
     //добавить человека
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO public.people(name, patronymic, surname, birthday)" +
-                        "VALUES (?, ?, ?, ?);",
+        jdbcTemplate.update("INSERT INTO public.people(name, patronymic, surname, birthday, email)" +
+                        "VALUES (?, ?, ?, ?, ?);",
                 person.getName(),
                 person.getPatronymic(),
                 person.getSurname(),
-                person.getBirthday());
+                person.getBirthday(),
+                person.getEmail());
     }
 
     //получить человека по id
     public Optional<Person> getPerson(int id) {
         return jdbcTemplate.query("SELECT * FROM People WHERE id=?;",
                 new PersonRowMapper(), new Object[]{id}).stream().findAny();
+    }
+
+    //получить человека по id
+    public Optional<Person> getPersonByEmail(String email) {
+        return jdbcTemplate.query("SELECT * FROM People WHERE email=?;",
+                new PersonRowMapper(), new Object[]{email}).stream().findAny();
     }
 
     //получить список книг, взятых определенным человеком
@@ -52,11 +59,12 @@ public class PersonDAO {
     //редактировать данные о человеке
     public void update(Person updatedPerson, int id) {
         jdbcTemplate.update("update people set " +
-                "name = ?, patronymic = ?, surname = ?, birthday = ? where id = ?;",
+                "name = ?, patronymic = ?, surname = ?, birthday = ?, email = ? where id = ?;",
                 updatedPerson.getName(),
                 updatedPerson.getPatronymic(),
                 updatedPerson.getSurname(),
                 updatedPerson.getBirthday(),
+                updatedPerson.getEmail(),
                 id);
     }
 }
