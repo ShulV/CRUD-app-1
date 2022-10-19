@@ -34,13 +34,13 @@ public class PersonValidator implements Validator {
         }
 
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getName().codePointAt(0)))
+        if (person.getName().length() > 0 && !Character.isUpperCase(person.getName().codePointAt(0)))
             errors.rejectValue("name", "", "Name should start with a capital letter");
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getPatronymic().codePointAt(0)))
+        if (person.getPatronymic().length() > 0 && !Character.isUpperCase(person.getPatronymic().codePointAt(0)))
             errors.rejectValue("patronymic", "", "Patronymic should start with a capital letter");
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getSurname().codePointAt(0)))
+        if (person.getSurname().length() > 0 && !Character.isUpperCase(person.getSurname().codePointAt(0)))
             errors.rejectValue("surname", "", "Surname should start with a capital letter");
     }
 }
