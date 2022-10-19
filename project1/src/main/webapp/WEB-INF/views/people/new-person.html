@@ -8,33 +8,33 @@
 </head>
 <body>
 <h2>Страница добавления человека</h2>
-<form th:method="POST" th:action="@{/people}" th:object="${person}" class="add-person-form">
+<form th:method="POST" th:action="@{/people}" th:object="${person}" class="form">
   <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
-  <div class="add-person-form__field">
+  <div class="form__field">
     <label th:for="name">Введите имя:</label>
     <input type="text" th:field="*{name}" id="name"/>
   </div>
   <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic Error</div>
-  <div class="add-person-form__field">
+  <div class="form__field">
     <label th:for="patronymic">Введите отчество:</label>
     <input type="text" th:field="*{patronymic}" id="patronymic"/>
   </div>
   <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
-  <div class="add-person-form__field">
+  <div class="form__field">
     <label th:for="surname">Введите фамилию:</label>
     <input type="text" th:field="*{surname}" id="surname"/>
   </div>
   <div style="color:red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</div>
-  <div class="add-person-form__field">
+  <div class="form__field">
     <label th:for="birthday">Выберите дату рождения:</label>
     <input type="date" th:field="*{birthday}" id="birthday"/>
   </div>
   <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
-  <div class="add-person-form__field">
+  <div class="form__field">
     <label th:for="email">Введите email:</label>
     <input type="text" th:field="*{email}" id="email"/>
   </div>
-  <input class="add-person-form__btn-submit" type="submit" value="Добавить"/>
+  <input class="form__btn-submit" type="submit" value="Добавить"/>
 </form>
 </body>
 </html>

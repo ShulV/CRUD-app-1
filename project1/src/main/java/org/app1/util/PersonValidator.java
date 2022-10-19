@@ -30,17 +30,17 @@ public class PersonValidator implements Validator {
         boolean isExistingEmail = personDAO.getPersonByEmail(person.getEmail()).isPresent();
         if (!isExistingId && isExistingEmail) {
             // поле, код ошибки, сообщение ошибки
-            errors.rejectValue("email", "", "This email is already in use");
+            errors.rejectValue("email", "", "Этот email уже используется");
         }
 
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getName().codePointAt(0)))
-            errors.rejectValue("name", "", "Name should start with a capital letter");
+        if (person.getName().length() > 0 && !Character.isUpperCase(person.getName().codePointAt(0)))
+            errors.rejectValue("name", "", "Имя должно начинаться с заглавной буквы");
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getPatronymic().codePointAt(0)))
-            errors.rejectValue("patronymic", "", "Patronymic should start with a capital letter");
+        if (person.getPatronymic().length() > 0 && !Character.isUpperCase(person.getPatronymic().codePointAt(0)))
+            errors.rejectValue("patronymic", "", "Отчество должно начинаться с заглавной буквы");
         // Проверяем, что у человека имя начинается с заглавной буквы
-        if (!Character.isUpperCase(person.getSurname().codePointAt(0)))
-            errors.rejectValue("surname", "", "Surname should start with a capital letter");
+        if (person.getSurname().length() > 0 && !Character.isUpperCase(person.getSurname().codePointAt(0)))
+            errors.rejectValue("surname", "", "Фамилия должна начинаться с заглавной буквы");
     }
 }

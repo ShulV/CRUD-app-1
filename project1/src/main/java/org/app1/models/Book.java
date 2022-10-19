@@ -10,13 +10,13 @@ import java.time.LocalDate;
 
 public class Book {
     private int id;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 50, message = "Name should be between 2 and 50 characters")
+    @NotEmpty(message = "Название не должно быть пустым")
+    @Size(min = 2, max = 50, message = "Название должно быть от 2 до 50 символов")
     private String name;
-    @NotEmpty(message = "Author name should not be empty")
-    @Size(min = 2, max = 100, message = "Author name should be between 2 and 100 characters")
+    @NotEmpty(message = "Поле автор не должно быть пустым")
+    @Size(min = 2, max = 100, message = "Поле автор должно быть от 2 до 100 символов")
     private String author;
-    @NotNull(message = "Date should not be empty")
+    @NotNull(message = "Дата не должна быть пустой")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
