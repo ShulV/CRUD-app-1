@@ -15,22 +15,22 @@ import java.time.LocalDate;
 
 public class Person {
     private int id;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @NotEmpty(message = "Имя не должен быть пустым")
+    @Size(min = 2, max = 30, message = "Длина имени должна быть от 2 до 30 символов")
     private String name;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @NotEmpty(message = "Отчество не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Длина отчества должна быть от 2 до 30 символов")
     private String patronymic;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @NotEmpty(message = "Фамилия не должна быть пустой")
+    @Size(min = 2, max = 30, message = "Длина фамилии должна быть от 2 до 30 символов")
     private String surname;
-    @NotNull(message = "Date should not be empty")
+    @NotNull(message = "Дата не должна быть пустой")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
-    @NotNull(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
+    @NotNull(message = "Email не должен быть пустой")
+    @Email(message = "Email должен быть валидным")
     private String email;
 
     public Person() {
