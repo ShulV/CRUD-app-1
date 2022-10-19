@@ -5,20 +5,25 @@ CRUD app. Tech stack: java spring, thymeleaf, HTML, CSS, postgres, JDBC Template
 
 ### Список людей:
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/people.png" alt="index.html" width="350">
+
 ### Более подробно об одном человеке:
 <div>
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/people__id.png" alt="person.html - 1" width="350">
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/people__id-without-book.png" alt="person.html - 2" width="350">
 </div>
+
 ### Редактирование человека:
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/people__id-edit.png" alt="edit-person.html" width="350">
+
 ### Список книг:
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/books.png" alt="books.html" width="350">
+
 ### Более подробно об одной книге:
 <div>
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/books__id.png" alt="book.html - 1" width="350">
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/books__id-without-person.png" alt="book.html - 2" width="350">
 </div>
+
 ### Редактирование книги:
 <img src="https://github.com/ShulV/CRUD-app-1/blob/main/doc/doc_images/books__id-edit.png" alt="book-edit.html - 2" width="350">
 
