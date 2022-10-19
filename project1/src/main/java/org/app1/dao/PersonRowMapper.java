@@ -16,6 +16,7 @@ public class PersonRowMapper implements RowMapper<Person> {
         person.setPatronymic(rs.getString("patronymic"));
         person.setSurname(rs.getString("surname"));
         person.setBirthday(rs.getObject("birthday", LocalDate.class));
+        person.setEmail(rs.getString("email"));
         return person;
     }
 }

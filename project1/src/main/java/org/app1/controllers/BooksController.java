@@ -73,7 +73,24 @@ public class BooksController {
     //запрос на получение страницы изменения книги
     @GetMapping("/{id}/edit")
     public String editBookPage(@PathVariable int id, Model model) {
-        return "books/edit-book";
+
+        Optional<Book> selectedBook = bookDAO.getBook(id);
+        if (selectedBook.isPresent()) {
+            model.addAttribute("book", selectedBook.get());
+            return "/books/edit-book";
+        }
+        return "redirect:/books";
+    }
+
+    //запрос на редактирование данных книги
+    @PatchMapping("/{id}")
+    public String edit(@PathVariable int id, @ModelAttribute("book") @Valid Book updatedBook,
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "books/edit-book";
+
+        bookDAO.update(updatedBook, id);
+        return "redirect:/books/" + id;
     }
 
     //запрос на удаление книги
