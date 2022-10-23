@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Book list</title>
+    <script src="../assets/js/search-books.js" defer></script>
 </head>
 <body>
 <h2>Страница со списком всех книг</h2>
-<div th:each="book : ${books}">
-    <a th:href="@{/books/{id}(id=${book.getId()})}">
-        <span th:text="${book.getName()}"></span>,
-        <span th:text="${book.getAuthor()}"></span>,
-        <span th:text="${book.getYear()}"></span>
-    </a>
+<form>
+    <input type="text" placeholder="Поиск" id="book-search" autofocus>
+</form>
+<div id="books-container">
+    <div th:each="book : ${books}">
+        <a th:href="@{/books/{id}(id=${book.getId()})}">
+            <span th:text="${book.getName()}"></span>,
+            <span th:text="${book.getAuthor()}"></span>,
+            <span th:text="${book.getYear()}"></span>
+        </a>
+    </div>
 </div>
+
 <hr>
 <a href="/books/new">Добавить</a>
 </body>
