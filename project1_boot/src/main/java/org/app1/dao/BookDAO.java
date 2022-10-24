@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -21,6 +22,13 @@ public class BookDAO {
     //получить список всех книг
     public List<Book> index() {
         return jdbcTemplate.query("SELECT * FROM Books", new BookRowMapper());
+    }
+
+    //получить список книг, в которых встречается слово word (без учета регистра)
+    public List<Book> getBooksByWordMatching(String word) {
+        return jdbcTemplate.query("SELECT * FROM Books WHERE lower(name) LIKE lower(?);",
+                new BookRowMapper(),
+                "%"+word+"%");
     }
 
     //получить список книг, взятых определенным человеком
