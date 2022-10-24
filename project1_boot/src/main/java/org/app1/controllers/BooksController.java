@@ -34,6 +34,7 @@ public class BooksController {
         model.addAttribute("books", bookDAO.index());
         return "books/all-books";
     }
+
     //запрос на получение страницы с определенной книгой
     @GetMapping("/{id}")
     public String bookPage(@PathVariable int id, Model model, @ModelAttribute("person") Person person) {
