@@ -49,7 +49,7 @@ CREATE TABLE books(
     "name" varchar(100) NOT NULL,
     author varchar(100) NOT NULL,
     date date NOT NULL,
-    people_id int DEFAULT NULL REFERENCES people(id) ON DELETE Set null ON UPDATE Cascade
+    person_id int DEFAULT NULL REFERENCES people(id) ON DELETE Set null ON UPDATE Cascade
 );
 ```
 
